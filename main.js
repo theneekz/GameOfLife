@@ -58,10 +58,6 @@ const paint = () => {
   // HINT:
   //   https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
   //   https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagName
-  // for (let i = 0; i < tds.length; i++) {
-  //   if (gol.getCell(tds[i].dataset[row], tds[i].dataset[width]) === 'alive') {
-  //   }
-  // }
 };
 
 /**

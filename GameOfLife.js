@@ -50,7 +50,7 @@ class GameOfLife {
   livingNeighbors(row, col) {
     // TODO: Return the count of living neighbors.
     //given cells position, return number of living neighbors
-    //use utility methods to get neighbors
+
     // get cell then go to living neighbors
 
     return (
