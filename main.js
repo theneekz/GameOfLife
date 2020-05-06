@@ -38,12 +38,16 @@ document.getElementById('board').append(table);
  */
 
 const paint = () => {
+  tds.forEach((td) => {
+    const cellValue = gol.getCell(td.dataset.row, td.dataset.col);
+    if (cellValue === 1) {
+      td.classList.add('alive');
+    } else {
+      td.classList.remove('alive');
+    }
+  });
   // TODO:
   //   1. For each <td> in the table:
-  for (let i = 0; i < tds.length; i++) {
-    if (gol.getCell(tds[i].dataset[row], tds[i].dataset[width]) === 'alive') {
-    }
-  }
   //     a. If its corresponding cell in gol instance is alive,
   //        give the <td> the `alive` CSS class.
   //     b. Otherwise, remove the `alive` class.
@@ -54,6 +58,10 @@ const paint = () => {
   // HINT:
   //   https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
   //   https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagName
+  // for (let i = 0; i < tds.length; i++) {
+  //   if (gol.getCell(tds[i].dataset[row], tds[i].dataset[width]) === 'alive') {
+  //   }
+  // }
 };
 
 /**
@@ -62,23 +70,46 @@ const paint = () => {
 
 document.getElementById('board').addEventListener('click', (event) => {
   // TODO: Toggle clicked cell (event.target) and paint
+  gol.toggleCell(event.target.dataset.row, event.target.dataset.col);
+  paint();
 });
 
 document.getElementById('step_btn').addEventListener('click', (event) => {
   // TODO: Do one gol tick and paint
+  gol.tick();
+  paint();
 });
+
+let interval = null;
 
 document.getElementById('play_btn').addEventListener('click', (event) => {
   // TODO: Start playing by calling `tick` and paint
   // repeatedly every fixed time interval.
   // HINT:
   // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval
+  if (!interval) {
+    interval = setInterval(() => {
+      gol.tick();
+      paint();
+    }, 100);
+  } else {
+    clearInterval(interval);
+    interval = null;
+  }
 });
 
 document.getElementById('random_btn').addEventListener('click', (event) => {
   // TODO: Randomize the board and paint
+  gol.forEachCell((row, col) => {
+    gol.setCell(Math.round(Math.random()), row, col);
+  });
+  paint();
 });
 
 document.getElementById('clear_btn').addEventListener('click', (event) => {
   // TODO: Clear the board and paint
+  gol.forEachCell((row, col) => {
+    gol.setCell(0, row, col);
+  });
+  paint();
 });
