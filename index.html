@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="main.css" />
     <script src="GameOfLife.js" defer></script>
     <script src="main.js" defer></script>
+    <script src="patterns.js" defer></script>
   </head>
 
   <body>
@@ -19,6 +20,11 @@
         <button id="play_btn" class="button">Play</button>
         <button id="random_btn" class="button">Randomize Board</button>
         <button id="clear_btn" class="button">Clear</button>
+
+        <select class="button" id="patterns">
+          <option value="">Load an example pattern</option>
+          <option value="glider">Glider</option>
+        </select>
       </div>
 
       <footer>

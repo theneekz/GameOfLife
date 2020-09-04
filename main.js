@@ -109,3 +109,20 @@ document.getElementById('clear_btn').addEventListener('click', (event) => {
   });
   paint();
 });
+
+const patternSelect = document.getElementById('patterns');
+
+patternSelect.addEventListener('change', (event) => {
+  //first clear
+  gol.forEachCell((row, col) => {
+    gol.setCell(0, row, col);
+  });
+  //TODO: set value of pattern
+  let makePattern = patterns[event.target.value];
+  makePattern();
+
+  //actually render it
+  paint();
+
+  patternSelect.selectedIndex = 0;
+});
