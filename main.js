@@ -117,7 +117,7 @@ patternSelect.addEventListener('change', (event) => {
   gol.forEachCell((row, col) => {
     gol.setCell(0, row, col);
   });
-  //TODO: set value of pattern
+  //set values of cells for specific pattern
   let makePattern = patterns[event.target.value];
   makePattern();
 
@@ -125,4 +125,30 @@ patternSelect.addEventListener('change', (event) => {
   paint();
 
   patternSelect.selectedIndex = 0;
+});
+
+const readTwoDarr = (customBoard) => {
+  function helper(customBoard) {
+    for (let row = 0; row < height; row++) {
+      for (let col = 0; col < width; col++) {
+        setCell(customBoard[row][col], row, col);
+      }
+    }
+  }
+  return helper(customBoard);
+};
+
+// takes in 2d array of custom board and a name
+const saveCustom = (twoDarr, name) => {
+  //name will be form input
+  const nameValue = name.toLowerCase().split().join('');
+  //set patterns property to have
+  patterns[nameValue] = readTwoDarr(twoDarr);
+};
+
+// const nameOfPattern = document.getElementById('customName');
+
+document.getElementById('save').addEventListener('onsubmit', (e) => {
+  e.preventDefault();
+  console.log(e.target.value);
 });
